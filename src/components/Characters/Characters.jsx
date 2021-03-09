@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 import CharacterCard from "../CharacterCard/CharacterCard";
-import { Container, Button } from "./styles";
+import { Container } from "./styles";
 import Search from "../Search/Search";
 import FavoriteSection from "../FavoritesSection/FavoritesSection";
 
