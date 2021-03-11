@@ -9,8 +9,8 @@ import {
 
 import CharacterCard from "../CharacterCard/CharacterCard";
 import { Container } from "./styles";
-import Search from "../Search/Search";
 import FavoritesSection from "../FavoritesSection/FavoritesSection";
+import { useSearchRef } from "../../context/SearchContext";
 
 const initialState = {
   favorites: [],
@@ -46,22 +46,29 @@ const getMoreCharacters = async (page) => {
   return myCharacters.results;
 };
 
-const Characters = (searchReference) => {
+const Characters = () => {
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState(mySearch);
+  const { searchReference } = useSearchRef();
+  const search = !searchReference.current
+    ? "null"
+    : searchReference.current.value;
+  // console.log(
+  //   "la referencia.current.value en characters es",
+  //   !searchReference.current ? "null" : searchReference.current.value
+  // );
+
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
-  const searchInput = useRef(null);
-  const containerRef = useRef(null);
 
   const handleClick = (favorite) => {
     dispatch({ type: "TOGGLE_TO_FAVORITES", payload: favorite });
   };
 
-  const handleSearch = useCallback(
-    () => setSearch(searchInput.current.value),
-    []
-  );
+  // const handleSearch = useCallback(
+  //   () => setSearch(searchInput.current.value),
+  //   []
+  // );
 
   const filteredUsers = useMemo(
     () =>
@@ -88,14 +95,14 @@ const Characters = (searchReference) => {
 
     return () => chargeButton.disconnect();
   }, [page]);
-  console.log("render Characters");
+
+  console.log("render Characters, search", search);
   return (
     <>
-      <Search searchI={searchInput} search={search} hSearch={handleSearch} />
       <FavoritesSection
         listOfFavorites={favorites.favorites}
       ></FavoritesSection>
-      <Container className="Characters" ref={containerRef}>
+      <Container className="Characters">
         {filteredUsers.map((character) => (
           <CharacterCard
             key={character.id}
@@ -115,10 +122,6 @@ const Characters = (searchReference) => {
         ))}
       </Container>
       <div id="test"></div>
-      {/* {page > 1 && <Button onClick={handlePage}>Prev. Page</Button>}
-      {page < 34 && (
-        <Button onClick={() => handlePage("next")}> Next Page</Button>
-      )} */}
     </>
   );
 };

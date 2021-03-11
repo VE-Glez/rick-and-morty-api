@@ -1,9 +1,18 @@
 import { FavoritesContainer, Card } from "./styles";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 const FavoritesSection = ({ listOfFavorites }) => {
-  const [active, setActive] = useState(listOfFavorites[-1] || {});
+  const [active, setActive] = useState({});
+  const [contador, setContador] = useState(0);
+  console.log(`initial state es ${listOfFavorites[0]}`);
   console.log("render Favorites and active is:", active.id);
-  console.log(`index of ${listOfFavorites.indexOf(active)}`);
+
+  useEffect(() => {
+    setActive(listOfFavorites[0] || {});
+    console.log("entrando al efecto al iniciar el render");
+    setContador((pv) => pv + 1);
+    console.log("el numero de renders han sido: ", contador);
+  }, []);
+
   return (
     <FavoritesContainer id="contendedorFavoritos">
       <h3>Lista de favoritos</h3>

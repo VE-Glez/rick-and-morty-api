@@ -24,7 +24,7 @@ const themeReducer = (state, action) => {
       return themesColors.light;
 
     default:
-      return themesColors.dark;
+      return themesColors.light;
   }
 };
 
@@ -35,7 +35,7 @@ export const useTheme = () => {
 };
 
 const ThemeContextProvider = ({ children }) => {
-  const [theme, themeDispatch] = useReducer(themeReducer, themesColors.dark);
+  const [theme, themeDispatch] = useReducer(themeReducer, themesColors.light);
   return (
     <ThemeContext.Provider value={{ theme, themeDispatch, themes }}>
       {children}

@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import ThemeContextProvider from "./context/ThemeContext";
-
+import SearchContext from "./context/SearchContext";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <App />
+      <SearchContext>
+        <App />
+      </SearchContext>
     </ThemeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

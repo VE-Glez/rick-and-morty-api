@@ -1,5 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
-
+import Search from "../Search/Search";
 const Header = () => {
   const { themeDispatch, themes } = useTheme();
 
@@ -11,9 +11,11 @@ const Header = () => {
       <h1>React Hooks</h1>
       <label htmlFor="themePicker">Theme picker</label>
       <select onChange={handleTheme} id="themePicker">
-        <option value={themes.DARK}>Dark Mode</option>
         <option value={themes.LIGHT}>Light Mode</option>
+        <option value={themes.DARK}>Dark Mode</option>
       </select>
+
+      <Search />
     </header>
   );
 };
