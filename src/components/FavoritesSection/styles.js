@@ -28,7 +28,6 @@ export const Card = styled.article`
   background-color: rgba(0, 0, 0, 0.1);
   filter: blur(0.9);
 
-  border: 1px solid blueviolet;
   margin: 0 -25px;
   min-width: 120px;
   max-width: 120px;

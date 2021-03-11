@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { useState } from "react";
 const SearchBox = styled.div`
   position: fixed;
   left: 0;

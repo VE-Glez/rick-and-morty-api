@@ -1,52 +1,28 @@
 import { FavoritesContainer, Card } from "./styles";
 import { useState, useEffect, useRef } from "react";
 const FavoritesSection = ({ listOfFavorites }) => {
-  const [active, setActive] = useState(0);
-  const [intersections, setIntersections] = useState([]);
-  const tarjetas = useRef(new Array());
-  const contenedorTarjetas = document.querySelector(".contendedorFavoritos");
-
-  console.log("tamaño favoritos", listOfFavorites.length);
-  console.log(
-    "mi ref actual es FUERA eFFECT",
-    tarjetas.current.forEach((e) =>
-      !e ? "null" : console.log("classname: ", e.className)
-    )
-  );
-
-  useEffect(() => {
-    console.log("mi ref contenderod", contenedorTarjetas);
-    const observador = new IntersectionObserver(
-      (entries) => console.log(entries[0].boundingClientRect),
-      {
-        threshold: 1,
-        root: contenedorTarjetas,
-      }
-    );
-    console.log("ref current", tarjetas.current);
-    listOfFavorites.length && observador.observe(tarjetas.current);
-  }, [tarjetas]);
-
+  const [active, setActive] = useState(listOfFavorites[-1] || {});
+  console.log("render Favorites and active is:", active.id);
+  console.log(`index of ${listOfFavorites.indexOf(active)}`);
   return (
     <FavoritesContainer id="contendedorFavoritos">
       <h3>Lista de favoritos</h3>
-      {listOfFavorites.map((favorite, index) => (
+      {listOfFavorites.map((favorite, index, thisArray) => (
         <Card
           key={favorite.id}
-          ref={(favorite) => tarjetas.current.push(favorite)}
-          className={`${
-            favorite.id === active
+          className={
+            favorite.id === active.id
               ? "isActive"
-              : active > favorite.id
+              : thisArray.indexOf(active) < index
               ? "isRight"
               : "isLeft"
           }
-            `}
           key={favorite.id}
-          onClick={() => setActive(favorite.id)}
+          onClick={() => setActive(favorite)}
         >
           <img src={favorite.image} alt={favorite.name} />
           <h4>{favorite.name}</h4>
+          <p>Favorite ID: {favorite.id}</p>
         </Card>
       ))}
     </FavoritesContainer>

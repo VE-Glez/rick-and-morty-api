@@ -6,6 +6,7 @@ import {
   useRef,
   useCallback,
 } from "react";
+
 import CharacterCard from "../CharacterCard/CharacterCard";
 import { Container } from "./styles";
 import Search from "../Search/Search";
@@ -45,7 +46,7 @@ const getMoreCharacters = async (page) => {
   return myCharacters.results;
 };
 
-const Characters = () => {
+const Characters = (searchReference) => {
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
   const [search, setSearch] = useState("");
   const [characters, setCharacters] = useState([]);
