@@ -9,7 +9,7 @@ import {
 import CharacterCard from "../CharacterCard/CharacterCard";
 import { Container } from "./styles";
 import Search from "../Search/Search";
-import FavoriteSection from "../FavoritesSection/FavoritesSection";
+import FavoritesSection from "../FavoritesSection/FavoritesSection";
 
 const initialState = {
   favorites: [],
@@ -70,21 +70,6 @@ const Characters = () => {
     [characters, search]
   );
 
-  // const handlePage = useCallback(
-  //   (next) => {
-  //     console.log(`next its ${next}`);
-  //     console.log(searchInput);
-
-  //     if (next === "next") {
-  //       setPage(page + 1);
-  //     } else {
-  //       setPage(page - 1);
-  //     }
-  //     console.log(`la page es ${page}`);
-  //   },
-  //   [page]
-  // );
-
   useEffect(() => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
@@ -102,15 +87,13 @@ const Characters = () => {
 
     return () => chargeButton.disconnect();
   }, [page]);
-
+  console.log("render Characters");
   return (
     <>
       <Search searchI={searchInput} search={search} hSearch={handleSearch} />
-      <FavoriteSection>
-        {favorites.favorites.map((favorite) => (
-          <li key={favorite.id}>{favorite.name}</li>
-        ))}
-      </FavoriteSection>
+      <FavoritesSection
+        listOfFavorites={favorites.favorites}
+      ></FavoritesSection>
       <Container className="Characters" ref={containerRef}>
         {filteredUsers.map((character) => (
           <CharacterCard

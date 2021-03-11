@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Article = styled.article`
   max-width: 250px;
+  min-width: 200px;
   height: 250px;
   box-shadow: 0 0 5px #1ccaff;
   display: flex;

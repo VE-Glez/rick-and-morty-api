@@ -27,5 +27,3 @@ export const Button = styled.button`
   background-color: inherit;
   color: inherit;
 `;
-
-export const FavoritesSection = styled.section``;
