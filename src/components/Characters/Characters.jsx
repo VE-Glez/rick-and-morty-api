@@ -1,11 +1,4 @@
-import {
-  useState,
-  useReducer,
-  useEffect,
-  useMemo,
-  useRef,
-  useCallback,
-} from "react";
+import { useState, useReducer, useEffect, useMemo } from "react";
 
 import CharacterCard from "../CharacterCard/CharacterCard";
 import { Container } from "./styles";
@@ -48,27 +41,16 @@ const getMoreCharacters = async (page) => {
 
 const Characters = () => {
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
-  // const [search, setSearch] = useState(mySearch);
   const { searchReference } = useSearchRef();
   const search = !searchReference.current
     ? "null"
     : searchReference.current.value;
-  // console.log(
-  //   "la referencia.current.value en characters es",
-  //   !searchReference.current ? "null" : searchReference.current.value
-  // );
-
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
 
   const handleClick = (favorite) => {
     dispatch({ type: "TOGGLE_TO_FAVORITES", payload: favorite });
   };
-
-  // const handleSearch = useCallback(
-  //   () => setSearch(searchInput.current.value),
-  //   []
-  // );
 
   const filteredUsers = useMemo(
     () =>
@@ -89,14 +71,13 @@ const Characters = () => {
           setPage(page + 1);
         }
       },
-      { threshold: 1 }
+      { threshold: 0.1 }
     );
-    chargeButton.observe(document.getElementById("test"));
+    chargeButton.observe(document.getElementById("loadMore"));
 
     return () => chargeButton.disconnect();
   }, [page]);
 
-  console.log("render Characters, search", search);
   return (
     <>
       <FavoritesSection
@@ -106,6 +87,7 @@ const Characters = () => {
         {filteredUsers.map((character) => (
           <CharacterCard
             key={character.id}
+            id={character.id}
             name={character.name}
             specie={character.species}
             gender={character.gender}
@@ -120,8 +102,8 @@ const Characters = () => {
             </button>
           </CharacterCard>
         ))}
+        <div id="loadMore"></div>
       </Container>
-      <div id="test"></div>
     </>
   );
 };

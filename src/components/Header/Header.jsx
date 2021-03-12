@@ -4,7 +4,7 @@ const Header = () => {
   const { themeDispatch, themes } = useTheme();
 
   const handleTheme = (e) => {
-    themeDispatch({ type: e.target.value });
+    e.target.value && themeDispatch({ type: e.target.value });
   };
   return (
     <header>
@@ -13,6 +13,7 @@ const Header = () => {
       <select onChange={handleTheme} id="themePicker">
         <option value={themes.LIGHT}>Light Mode</option>
         <option value={themes.DARK}>Dark Mode</option>
+        <option value="">More themes, soon...</option>
       </select>
 
       <Search />

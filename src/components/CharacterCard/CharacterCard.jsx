@@ -1,8 +1,17 @@
 import { useTheme } from "../../context/ThemeContext";
-import { Picture, Article } from "./styles";
+import { Picture, Article, LINK } from "./styles";
 
-const CharacterCard = ({ children, image, name, status, specie, gender }) => {
+const CharacterCard = ({
+  children,
+  image,
+  name,
+  status,
+  specie,
+  gender,
+  id,
+}) => {
   const { theme } = useTheme();
+
   return (
     <Article theme={theme}>
       <header>
@@ -15,8 +24,9 @@ const CharacterCard = ({ children, image, name, status, specie, gender }) => {
         <p className="status">{status}</p>
         <p>{specie}</p>
         <p>{gender}</p>
+        <LINK to={`/characterDetails/${id}`}>More details</LINK>
       </div>
-      {children}
+      {/* {children} */}
     </Article>
   );
 };
