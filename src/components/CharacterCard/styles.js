@@ -2,51 +2,55 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Article = styled.article`
-  /* max-width: 250px; */
-  min-width: 200px;
-  height: 250px;
-  box-shadow: 0 0 5px #1ccaff;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow-y: hidden;
+  width: 310px;
+  min-height: 225px;
+  padding: 10px;
+  display: grid;
+  gap: 10px 0;
+  box-shadow: 0 0 5px;
+  grid:
+    "header info" auto
+    "like more" 29px / 1fr 1fr;
+  justify-items: stretch;
+
+  header {
+    grid-area: header;
+    position: relative;
+
+    img {
+      width: 70px;
+      border-radius: 35px;
+    }
+  }
 
   .cardBody {
-    position: absolute;
+    grid-area: info;
+    text-align: center;
+    background: ${({ theme }) => theme.fg};
+    color: ${({ theme }) => theme.bg};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 180px;
-    top: -100%;
-    left: 0;
-    right: 0;
-    transition: 0.5s ease all;
-
-    p:hover {
-      color: ${(props) => props.theme.bg};
-    }
+    border-radius: 10px;
   }
 
-  &:hover {
-    .cardBody {
-      color: ${(props) => props.theme.bg};
-      background-color: ${(props) => props.theme.fg};
-      top: 0;
-      text-align: center;
-    }
-  }
-`;
-
-export const Picture = styled.picture`
-  img {
-    width: 70%;
-    border-radius: 50%;
+  button {
+    grid-area: like;
   }
 `;
 
 export const LINK = styled(Link)`
-  /* width: 100%; */
-  /* margin: 0; */
+  grid-area: more;
+  margin: 0 auto;
   padding: 4px;
-  background-color: pink;
+  width: 75%;
+  height: auto;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid ${({ theme }) => theme.fg};
+  transition: 0.5s ease-in;
+
+  &:hover {
+    background-color: rgba(25, 85, 200, 0.8);
+  }
 `;

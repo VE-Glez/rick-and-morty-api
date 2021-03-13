@@ -1,32 +1,27 @@
 import { useTheme } from "../../context/ThemeContext";
-import { Picture, Article, LINK } from "./styles";
+import { Article, LINK } from "./styles";
 
-const CharacterCard = ({
-  children,
-  image,
-  name,
-  status,
-  specie,
-  gender,
-  id,
-}) => {
+const CharacterCard = ({ click, myFavorites, myCharacter }) => {
   const { theme } = useTheme();
-
+  const { image, name, status, specie, gender, id } = myCharacter;
   return (
     <Article theme={theme}>
       <header>
-        <Picture>
+        <picture>
           <img src={image} alt={name} />
-        </Picture>
+        </picture>
         <h3>{name}</h3>
       </header>
-      <div className="cardBody">
-        <p className="status">{status}</p>
-        <p>{specie}</p>
-        <p>{gender}</p>
-        <LINK to={`/characterDetails/${id}`}>More details</LINK>
-      </div>
-      {/* {children} */}
+      <section className="cardBody">
+        <p className="status">Status: {status}</p>
+        <p>Especie: {specie}</p>
+        <p>Género: {gender}</p>
+      </section>
+      <button onClick={() => click(myCharacter)}>
+        {myFavorites.includes(myCharacter) ? "Remove from " : "Add to"}{" "}
+        favorites
+      </button>
+      <LINK to={`/characterDetails/${id}`}>More details</LINK>
     </Article>
   );
 };

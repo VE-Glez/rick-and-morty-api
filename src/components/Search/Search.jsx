@@ -1,33 +1,45 @@
 import styled from "styled-components";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useSearchRef } from "../../context/SearchContext";
+import { BiSearch } from "react-icons/bi";
 const SearchBox = styled.div`
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  z-index: 210;
-  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 220px;
+  height: 30px;
+  border-radius: 25px;
+  background-color: white;
+  padding: 0 5px 0 15px;
+  box-shadow: 0 0 2px black;
+
+  input {
+    border: none;
+    height: 90%;
+    outline: none;
+  }
+  label {
+    /* border: 1px solid purple; */
+  }
 `;
 
-const Search = () => {
-  const { searchReference, search, setSearch } = useSearchRef();
+const Search = ({ placeHolder }) => {
+  const { searchReference, setSearch } = useSearchRef();
 
   const handleSearch = useCallback(
     () => setSearch(searchReference.current.value),
-    [search]
+    []
   );
   return (
     <SearchBox className="search">
-      <label>
-        {" "}
-        Find your favorite character{" "}
-        <input
-          type="text"
-          ref={searchReference}
-          value={search}
-          onChange={handleSearch}
-        />
+      <input
+        type="text"
+        ref={searchReference}
+        onChange={handleSearch}
+        placeholder={placeHolder}
+      />
+      <label onClick={() => searchReference.current.focus()}>
+        <BiSearch />
       </label>
     </SearchBox>
   );

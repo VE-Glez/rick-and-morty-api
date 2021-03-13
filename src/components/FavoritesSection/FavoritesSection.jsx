@@ -26,7 +26,6 @@ const FavoritesSection = ({ listOfFavorites }) => {
               ? "isRight"
               : "isLeft"
           }
-          key={favorite.id}
           onClick={() => setActive(favorite)}
         >
           <img src={favorite.image} alt={favorite.name} />

@@ -5,7 +5,7 @@ import { useSearchRef } from "./context/SearchContext";
 import { useTheme } from "./context/ThemeContext";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import styled from "styled-components";
-import CharacterDetails from "./components/CharacterDetails.js";
+import CharacterDetails from "./Pages/CharacterDetails/CharacterDetails";
 import NotFound from "./components/NotFound";
 
 const Wrapper = styled.div`
@@ -20,8 +20,8 @@ function App() {
   console.log("APP search", search);
   return (
     <Wrapper className="App" theme={theme}>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route exact path="/" component={Characters} />
           <Route

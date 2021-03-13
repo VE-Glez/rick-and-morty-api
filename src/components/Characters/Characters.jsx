@@ -77,7 +77,7 @@ const Characters = () => {
 
     return () => chargeButton.disconnect();
   }, [page]);
-
+  console.log("CHARACTERS render");
   return (
     <>
       <FavoritesSection
@@ -87,20 +87,10 @@ const Characters = () => {
         {filteredUsers.map((character) => (
           <CharacterCard
             key={character.id}
-            id={character.id}
-            name={character.name}
-            specie={character.species}
-            gender={character.gender}
-            image={character.image}
-            status={character.status}
-          >
-            <button onClick={() => handleClick(character)}>
-              {favorites.favorites.includes(character)
-                ? "Remove from "
-                : "Add to"}{" "}
-              favorites
-            </button>
-          </CharacterCard>
+            click={handleClick}
+            myCharacter={character}
+            myFavorites={favorites.favorites}
+          ></CharacterCard>
         ))}
         <div id="loadMore"></div>
       </Container>
