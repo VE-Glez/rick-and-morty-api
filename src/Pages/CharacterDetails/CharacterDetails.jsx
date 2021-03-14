@@ -1,27 +1,11 @@
 import { useEffect, useState } from "react";
-
-const useFetchData = (characterID) => {
-  const [character, setCharacter] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/${characterID}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("useEffect leugo del fetch, el data", data);
-        setCharacter(data);
-        setLoading(false);
-      });
-  }, []);
-
-  return {
-    character,
-    loading,
-  };
-};
+import Skeleton from "./Skeleton";
+import useFetchData from "../../hooks/useFetchData";
 
 const CharacterDetails = (props) => {
+  window.scrollTo(0, 0);
   const characterID = props.match.params.id;
-  const { character, loading } = useFetchData(characterID);
+  const { character, loading } = useFetchData("character", characterID);
   console.log(
     "RENDER characer details id",
     Object.entries(props).map((item) => `prop: ${item[0]}, value: ${item[1]}`)
@@ -30,7 +14,7 @@ const CharacterDetails = (props) => {
 
   console.log(character);
 
-  if (loading) return <h1>Loadings...</h1>;
+  if (loading) return <Skeleton />;
   return (
     <div>
       <img src={character.image} alt={character.name}></img>

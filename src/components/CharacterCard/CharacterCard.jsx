@@ -3,7 +3,7 @@ import { Article, LINK } from "./styles";
 
 const CharacterCard = ({ click, myFavorites, myCharacter }) => {
   const { theme } = useTheme();
-  const { image, name, status, specie, gender, id } = myCharacter;
+  const { image, name, status, species, gender, id } = myCharacter;
   return (
     <Article theme={theme}>
       <header>
@@ -14,7 +14,7 @@ const CharacterCard = ({ click, myFavorites, myCharacter }) => {
       </header>
       <section className="cardBody">
         <p className="status">Status: {status}</p>
-        <p>Especie: {specie}</p>
+        <p>Especie: {species}</p>
         <p>Género: {gender}</p>
       </section>
       <button onClick={() => click(myCharacter)}>

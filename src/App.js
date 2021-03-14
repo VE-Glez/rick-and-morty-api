@@ -6,7 +6,9 @@ import { useTheme } from "./context/ThemeContext";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import styled from "styled-components";
 import CharacterDetails from "./Pages/CharacterDetails/CharacterDetails";
-import NotFound from "./components/NotFound";
+import Episodes from "./Pages/Episodes/Episodes";
+import NotFound from "./Pages/NotFound";
+import Locations from "./Pages/Locations/Locations";
 
 const Wrapper = styled.div`
   color: ${(props) => props.theme.fg};
@@ -24,6 +26,8 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Characters} />
+          <Route exact path="/episodes" component={Episodes} />
+          <Route exact path="/locations" component={Locations} />
           <Route
             exact
             path="/characterDetails/:id"

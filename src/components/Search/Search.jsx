@@ -35,7 +35,7 @@ const Search = ({ placeHolder }) => {
       <input
         type="text"
         ref={searchReference}
-        onChange={handleSearch}
+        onInput={handleSearch}
         placeholder={placeHolder}
       />
       <label onClick={() => searchReference.current.focus()}>
