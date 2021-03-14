@@ -1,5 +1,6 @@
 import { FavoritesContainer, Card } from "./styles";
 import { useState, useEffect } from "react";
+import MinimalCard from "../MinimalCard/MinimalCard";
 const FavoritesSection = ({ listOfFavorites }) => {
   const [active, setActive] = useState({});
   const [contador, setContador] = useState(0);
@@ -17,21 +18,13 @@ const FavoritesSection = ({ listOfFavorites }) => {
     <FavoritesContainer id="contendedorFavoritos">
       <h3>Lista de favoritos</h3>
       {listOfFavorites.map((favorite, index, thisArray) => (
-        <Card
-          key={favorite.id}
-          className={
-            favorite.id === active.id
-              ? "isActive"
-              : thisArray.indexOf(active) < index
-              ? "isRight"
-              : "isLeft"
-          }
-          onClick={() => setActive(favorite)}
-        >
-          <img src={favorite.image} alt={favorite.name} />
-          <h4>{favorite.name}</h4>
-          <p>Favorite ID: {favorite.id}</p>
-        </Card>
+        <MinimalCard
+          favorite={favorite}
+          active={active}
+          thisArray={thisArray}
+          index={index}
+          callback={setActive}
+        />
       ))}
     </FavoritesContainer>
   );

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import Skeleton from "./Skeleton";
 import useFetchData from "../../hooks/useFetchData";
+import EpisodeCard from "../Episodes/EpisodeCard";
 
 const CharacterDetails = (props) => {
   window.scrollTo(0, 0);
@@ -26,7 +26,7 @@ const CharacterDetails = (props) => {
         <ul>
           Episodes:
           {character.episode.map((episode) => {
-            return <li>{episode}</li>;
+            return <EpisodeCard allURL={episode} />;
           })}
         </ul>
       </div>

@@ -18,6 +18,8 @@ export const Nav = styled.nav`
     flex-direction: row;
     justify-content: flex-end;
     position: relative;
+    background-color: initial;
+    opacity: 1;
   } ;
 `;
 

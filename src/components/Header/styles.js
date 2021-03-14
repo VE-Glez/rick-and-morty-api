@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
   display: flex;
@@ -12,11 +12,6 @@ export const HeaderStyled = styled.header`
   top: 0;
   width: 100%;
   transition: 0.5s;
-  ${(props) =>
-    props.fixed &&
-    css`
-      position: fixed;
-    `}
 
   .hamburger-react {
     @media (min-width: 768px) {

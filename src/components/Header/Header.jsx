@@ -1,13 +1,19 @@
 import Navbar from "../Navbar/Navbar.jsx";
 import { HeaderStyled } from "./styles.js";
 import { Divide } from "hamburger-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
-  const isFixed = false;
+
+  useEffect(() => {
+    const desapearMenu = () => setOpen(false);
+    let wrapperContent = document.querySelector("header ~ div:first-of-type");
+    wrapperContent.addEventListener("click", desapearMenu);
+  }, []);
+
   return (
     <>
-      <HeaderStyled fixed={isFixed}>
+      <HeaderStyled>
         <h1>React Hooks</h1>
         <Divide toggled={isOpen} toggle={setOpen} />
         <Navbar isOpen={isOpen} />
