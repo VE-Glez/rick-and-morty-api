@@ -30,7 +30,7 @@ const Episodes = () => {
   useEffect(() => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
-        if (entries[0].isIntersecting && page < 6) {
+        if (entries[0].isIntersecting && page < 3) {
           console.log(entries[0].isIntersecting);
           getMoreLocations(page).then((data) => {
             return seLocations((pv) => [...pv, ...data]);
