@@ -23,6 +23,7 @@ const CharacterDetails = (props) => {
         <h3>{character.name}</h3>
         <p>Status: {character.status}</p>
         <p>Gender: {character.gender}</p>
+        <p>Location: {character.origin.name}</p>
         <ul>
           Episodes:
           {character.episode.map((episode) => {

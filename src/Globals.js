@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyles = createGlobalStyle`
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -7,6 +10,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   font-size: 1.6rem;
+  background-color: ${({ theme }) => theme.bg};
+  color: ${({ theme }) => theme.fg};
 }
 
 html {
@@ -16,7 +21,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-header + div:first-of-type {
-  min-height: 100vh;
-}
+`;

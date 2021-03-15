@@ -9,6 +9,7 @@ import CharacterDetails from "./Pages/CharacterDetails/CharacterDetails";
 import Episodes from "./Pages/Episodes/Episodes";
 import NotFound from "./Pages/NotFound";
 import Locations from "./Pages/Locations/Locations";
+import { GlobalStyles } from "./Globals";
 
 const Wrapper = styled.div`
   color: ${(props) => props.theme.fg};
@@ -21,7 +22,8 @@ function App() {
   const search = useSearchRef();
   console.log("APP search", search);
   return (
-    <Wrapper className="App" theme={theme}>
+    <Wrapper className="App">
+      <GlobalStyles theme={theme} />
       <BrowserRouter>
         <Header />
         <Switch>
