@@ -1,36 +1,24 @@
-import { Label, Nav, NavItem } from "./styles";
+import { Nav, NavItem } from "./styles";
 import { useState, useEffect } from "react";
-import { useTheme } from "../../context/ThemeContext";
 import Search from "../Search/Search";
-const Navbar = ({ isOpen }) => {
-  const { themeDispatch, themes } = useTheme();
-  const handleTheme = (e) => {
-    e.target.value && themeDispatch({ type: e.target.value });
-  };
+import ThemePicker from "../ThemePicker/ThemePicker";
 
+
+const Navbar = ({ isOpen }) => {
   const [showFixed, setShowFixed] = useState(false);
 
   useEffect(() => {
-    const onScroll = (e) => {
+    const onScroll = () => {
       const newShowFixed = window.scrollY > 160;
       newShowFixed !== showFixed && setShowFixed(newShowFixed);
     };
-
     document.addEventListener("scroll", onScroll);
   }, []);
 
   return (
     <Nav toggled={isOpen}>
-      <Label htmlFor="themePicker">
-        <p>Theme picker</p>
-        <select onChange={handleTheme} id="themePicker">
-          <option value={themes.LIGHT}>Light Mode</option>
-          <option value={themes.DARK}>Dark Mode</option>
-          <option value="">More themes, soon...</option>
-        </select>
-      </Label>
+      <ThemePicker />
       <Search placeHolder="Search in this page" />
-
       {/* el search hace a dos referencias  */}
       <NavItem to="/">Characters</NavItem>
       <NavItem to="/locations">Locations</NavItem>

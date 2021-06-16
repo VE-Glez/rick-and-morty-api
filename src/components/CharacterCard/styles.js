@@ -8,6 +8,7 @@ export const Article = styled.article`
   display: grid;
   gap: 10px 0;
   box-shadow: 0 0 5px;
+  background-color: ${({theme}) => theme.cardBackground};
   grid:
     "header info" auto
     "like more" 29px / 1fr 1fr;
@@ -45,12 +46,13 @@ export const LINK = styled(Link)`
   padding: 4px;
   width: 75%;
   height: auto;
-  color: inherit;
+  color: ${({theme})=> theme.bg};
   text-decoration: none;
-  border: 1px solid ${({ theme }) => theme.fg};
   transition: 0.5s ease-in;
+  background-color: ${({theme}) => theme.CTA};
+  border-radius: 5px;
 
-  &:hover {
+  /* &:hover {
     background-color: rgba(25, 85, 200, 0.8);
-  }
+  } */
 `;

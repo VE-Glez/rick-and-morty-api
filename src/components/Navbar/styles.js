@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Nav = styled.nav`
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: inherit;
   display: ${({ toggled }) => (toggled ? "flex" : "none")};
   flex-direction: column;
   gap: 5px;
@@ -29,7 +29,7 @@ export const NavItem = styled(Link)`
   line-height: 33px;
   border-radius: 4px;
   width: 100%;
-  background: rgba(180, 75, 100, 0.8);
+  background: ${({theme}) => theme.cardBackground};
   color: inherit;
   font-size: 1.6rem;
 
@@ -43,11 +43,4 @@ export const NavItem = styled(Link)`
   }
 `;
 
-export const Label = styled.label`
-  font-style: italic;
 
-  select {
-    outline: none;
-    border: none;
-  }
-`;

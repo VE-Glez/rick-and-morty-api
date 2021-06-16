@@ -77,7 +77,6 @@ const Characters = () => {
 
     return () => chargeButton.disconnect();
   }, [page]);
-  console.log("CHARACTERS render");
   return (
     <>
       <FavoritesSection

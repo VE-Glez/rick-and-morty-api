@@ -3,15 +3,13 @@ import { useState, useEffect } from "react";
 import MinimalCard from "../MinimalCard/MinimalCard";
 const FavoritesSection = ({ listOfFavorites }) => {
   const [active, setActive] = useState({});
-  const [contador, setContador] = useState(0);
-  console.log(`initial state es ${listOfFavorites[0]}`);
-  console.log("render Favorites and active is:", active.id);
+  // const [contador, setContador] = useState(0);
+  // console.log(`initial state es ${listOfFavorites[0]}`);
+  // console.log("render Favorites and active is:", active.id);
 
   useEffect(() => {
     setActive(listOfFavorites[0] || {});
-    console.log("entrando al efecto al iniciar el render");
-    setContador((pv) => pv + 1);
-    console.log("el numero de renders han sido: ", contador);
+    // setContador((pv) => pv + 1);
   }, []);
 
   return (

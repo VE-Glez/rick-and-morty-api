@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
   display: flex;
-  background-color: inherit;
+  background-color: ${({theme}) => theme.header};
   flex-direction: row;
   gap: 10px;
   justify-content: space-around;
@@ -12,6 +12,7 @@ export const HeaderStyled = styled.header`
   top: 0;
   width: 100%;
   transition: 0.5s;
+  
 
   .hamburger-react {
     @media (min-width: 768px) {

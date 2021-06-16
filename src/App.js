@@ -1,28 +1,20 @@
 import Header from "./components/Header/Header";
 import Characters from "./components/Characters/Characters";
-
+import { ThemeProvider} from "styled-components"
 import { useSearchRef } from "./context/SearchContext";
 import { useTheme } from "./context/ThemeContext";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import styled from "styled-components";
 import CharacterDetails from "./Pages/CharacterDetails/CharacterDetails";
 import Episodes from "./Pages/Episodes/Episodes";
 import NotFound from "./Pages/NotFound";
 import Locations from "./Pages/Locations/Locations";
 import { GlobalStyles } from "./Globals";
 
-const Wrapper = styled.div`
-  color: ${(props) => props.theme.fg};
-  background-color: ${(props) => props.theme.bg};
-  text-align: center;
-`;
-
 function App() {
   const { theme } = useTheme();
-  const search = useSearchRef();
-  console.log("APP search", search);
   return (
-    <Wrapper className="App">
+    <div style={{textAlign: "center"}}>
+      <ThemeProvider theme={theme}>
       <GlobalStyles theme={theme} />
       <BrowserRouter>
         <Header />
@@ -46,7 +38,8 @@ function App() {
           <Route exact component={NotFound} />
         </Switch>
       </BrowserRouter>
-    </Wrapper>
+      </ThemeProvider>
+    </div>
   );
 }
 
