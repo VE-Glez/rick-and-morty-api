@@ -1,37 +1,32 @@
 import Skeleton from "./Skeleton";
 import useFetchData from "../../hooks/useFetchData";
-import EpisodeCard from "../Episodes/EpisodeCard";
+import EpisodeCardFromFetch from "../../containers/EpisodeCardFromFetch/EpisodeCardFromFetch";
+import { ListEpisodes, Container } from "./stylesCharacterDetails";
 
 const CharacterDetails = (props) => {
   window.scrollTo(0, 0);
   const characterID = props.match.params.id;
-  const { character, loading } = useFetchData("character", characterID);
-  console.log(
-    "RENDER characer details id",
-    Object.entries(props).map((item) => `prop: ${item[0]}, value: ${item[1]}`)
-  );
-  console.log("match", props.match.params);
-
-  console.log(character);
-
-  if (loading) return <Skeleton />;
+  const { result } = useFetchData("character", characterID);
+  
+  if (result.loading) return <Skeleton />;
   return (
-    <div>
-      <img src={character.image} alt={character.name}></img>
-
+    <Container>
+      <img src={result.data.image} alt={result.data.name}></img>
       <div>
-        <h3>{character.name}</h3>
-        <p>Status: {character.status}</p>
-        <p>Gender: {character.gender}</p>
-        <p>Location: {character.origin.name}</p>
-        <ul>
-          Episodes:
-          {character.episode.map((episode) => {
-            return <EpisodeCard allURL={episode} />;
+        <h3>{result.data.name}</h3>
+        <p>Status: {result.data.status}</p>
+        <p>Gender: {result.data.gender}</p>
+        <p>Location: {result.data.origin.name}</p>
+        <ListEpisodes>
+          <h4>Episodes:</h4>
+          {result.data.episode.map((url) => {
+            let id = url.split("/")
+            id = id[id.length - 1]
+            return <EpisodeCardFromFetch key={id} episodeID={id} />;
           })}
-        </ul>
+        </ListEpisodes>
       </div>
-    </div>
+    </Container>
   );
 };
 

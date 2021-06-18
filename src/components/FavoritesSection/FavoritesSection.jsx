@@ -1,22 +1,19 @@
-import { FavoritesContainer, Card } from "./styles";
+import { FavoritesContainer } from "./styles";
 import { useState, useEffect } from "react";
-import MinimalCard from "../MinimalCard/MinimalCard";
+import FavoriteCharacter from "../FavoriteCharacter/FavoriteCharacter";
 const FavoritesSection = ({ listOfFavorites }) => {
   const [active, setActive] = useState({});
-  // const [contador, setContador] = useState(0);
-  // console.log(`initial state es ${listOfFavorites[0]}`);
-  // console.log("render Favorites and active is:", active.id);
 
   useEffect(() => {
     setActive(listOfFavorites[0] || {});
-    // setContador((pv) => pv + 1);
-  }, []);
+  }, [listOfFavorites]);
 
+  
   return (
     <FavoritesContainer id="contendedorFavoritos">
       <h3>Lista de favoritos</h3>
       {listOfFavorites.map((favorite, index, thisArray) => (
-        <MinimalCard
+        <FavoriteCharacter
           favorite={favorite}
           active={active}
           thisArray={thisArray}

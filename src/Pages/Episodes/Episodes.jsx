@@ -1,41 +1,46 @@
 import { useState, useEffect, useMemo } from "react";
+import { useAPI } from "../../context/APIContext";
 import { useSearchRef } from "../../context/SearchContext";
-const getMoreLocations = async (page) => {
-  let myLocation = await fetch(
-    `https://rickandmortyapi.com/api/episode/?page=${page}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
+import { getMoreEpisodes } from "../../utils/getMoreEpisodes";
+import {  Container } from "./episodeStyles";
+import EpisodeCard from "../../components/EpisodeCard/EpisodeCard";
 
-  return myLocation.results;
-};
 
 const Episodes = () => {
   const { searchReference } = useSearchRef();
   const search = !searchReference.current
     ? "null"
     : searchReference.current.value;
-  const [locations, seLocations] = useState([]);
+    //puse locatioon pero se refiere a los episodios
+  // const [episodes, setEpisodes] = useState([]);
+  const {episodes, setEpisodes} = useAPI()
   const [page, setPage] = useState(1);
-  const filteredUsers = useMemo(
+
+  const episodesFilteres = useMemo(
     () =>
-      locations.filter((locations) =>
-        locations.name.toLowerCase().includes(search.toLowerCase())
+      episodes.filter((episodes) =>
+        episodes.name.toLowerCase().includes(search.toLowerCase())
       ),
-    [locations, search]
+    [episodes, search]
   );
 
   useEffect(() => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
         if (entries[0].isIntersecting && page < 3) {
-          console.log(entries[0].isIntersecting);
-          getMoreLocations(page).then((data) => {
-            return seLocations((pv) => [...pv, ...data]);
+          getMoreEpisodes(page).then((data) => {
+            let newOnes = []
+            data.map( episode => {
+              let id = episode.id
+              let exists = episodes.filter(ep => ep.id == id).length > 0
+              if(!exists) {
+                newOnes = [...newOnes, episode]
+              }
+            })
+            console.log("nuevos agregados a episodios: ", newOnes, "actuales: ", episodes)
+            return setEpisodes((pv) => [...pv, ...newOnes]);
           });
-          setPage(page + 1);
+          setPage(pv => pv + 1);
         }
       },
       { threshold: 0.1 }
@@ -47,17 +52,12 @@ const Episodes = () => {
 
   return (
     <>
-      <div>
-        <h2>Página de las dimensiones existentes conocidas filtered</h2>
-        {filteredUsers.map((myLoc) => (
-          <div key={myLoc.id} style={{ border: "1px solid purple" }}>
-            <p>Episode #{myLoc.id}</p>
-            <p>{myLoc.name}</p>
-            <p>{myLoc.air_data}</p>
-            <p>{myLoc.episode}</p>
-          </div>
+      <Container>
+        <h2>Lista completa de episodios</h2>
+        {episodesFilteres.map((episode) => (
+          <EpisodeCard key={episode.id} {...episode} />
         ))}
-      </div>
+      </Container>
       <div id="loadMore"></div>
     </>
   );

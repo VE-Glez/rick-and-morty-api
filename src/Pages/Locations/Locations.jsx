@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useSearchRef } from "../../context/SearchContext";
 const getMoreLocations = async (page) => {
   let myLocation = await fetch(
@@ -50,12 +51,14 @@ const Locations = () => {
       <div>
         <h2>Página de las dimensiones existentes conocidas filtered</h2>
         {filteredUsers.map((myLoc) => (
-          <div key={myLoc.id} style={{ border: "1px solid purple" }}>
+          <div key={myLoc.id} style={{border: '1px solid crimson'}}>
+            <Link to={`/locations/${myLoc.id}`}>
             <p>Lugar #{myLoc.id}</p>
             <p>{myLoc.name}</p>
             <p>{myLoc.type}</p>
             <p>{myLoc.dimension}</p>
             <p>{myLoc.created}</p>
+            </Link>
           </div>
         ))}
       </div>

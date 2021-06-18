@@ -1,53 +1,19 @@
-import { useState, useReducer, useEffect, useMemo } from "react";
-
-import CharacterCard from "../CharacterCard/CharacterCard";
+import { useState, useEffect, useMemo } from "react";
+import CharacterCard from "../../components/CharacterCard/CharacterCard";
 import { Container } from "./styles";
-import FavoritesSection from "../FavoritesSection/FavoritesSection";
+import FavoritesSection from "../../components/FavoritesSection/FavoritesSection";
 import { useSearchRef } from "../../context/SearchContext";
-
-const initialState = {
-  favorites: [],
-};
-
-const favoriteReducer = (state, action) => {
-  switch (action.type) {
-    case "TOGGLE_TO_FAVORITES":
-      if (state.favorites.includes(action.payload)) {
-        return {
-          state,
-          favorites: state.favorites.filter(
-            (value) => value !== action.payload
-          ),
-        };
-      }
-      return {
-        ...state,
-        favorites: [...state.favorites, action.payload],
-      };
-    default:
-      return state;
-  }
-};
-
-const getMoreCharacters = async (page) => {
-  let myCharacters = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}`
-  )
-    .then((response) => response.json())
-    .then((data) => data);
-
-  return myCharacters.results;
-};
+import { getMoreCharacters } from "../../utils/getMoreCharacters";
+import { useAPI } from "../../context/APIContext";
 
 const Characters = () => {
-  const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
   const { searchReference } = useSearchRef();
   const search = !searchReference.current
     ? "null"
     : searchReference.current.value;
-  const [characters, setCharacters] = useState([]);
+  const { characters, setCharacters, favorites, dispatch} = useAPI()
   const [page, setPage] = useState(1);
-
+  
   const handleClick = (favorite) => {
     dispatch({ type: "TOGGLE_TO_FAVORITES", payload: favorite });
   };
@@ -64,7 +30,6 @@ const Characters = () => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
         if (entries[0].isIntersecting && page < 35) {
-          console.log(entries[0].isIntersecting);
           getMoreCharacters(page).then((data) =>
             setCharacters((pv) => [...pv, ...data])
           );
@@ -76,7 +41,8 @@ const Characters = () => {
     chargeButton.observe(document.getElementById("loadMore"));
 
     return () => chargeButton.disconnect();
-  }, [page]);
+  }, [page, setCharacters]);
+
   return (
     <>
       <FavoritesSection

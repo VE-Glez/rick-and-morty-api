@@ -4,7 +4,8 @@ const themes = {
   DARK: "dark",
   LIGHT: "light",
   ONE: "one",
-  TWO: "two"
+  TWO: "two",
+  THREE: "three"
 };
 
 const themesColors = {
@@ -35,6 +36,13 @@ const themesColors = {
     cardBackground: "rgba(98, 109, 88, 1)",
     header: "rgba(16, 29, 66, 1)",
     bg: "rgba(13, 19, 23, 1)",
+  },
+  three: {
+    bg: "rgba(59, 13, 17, 1)",
+    header: "rgba(106, 57, 55, 1)",
+    cardBackground: "rgba(112, 101, 99, 1)",
+    CTA: "rgba(116, 131, 134, 1)",
+    fg: "rgba(157, 199, 200, 1)",
   }
 };
 
@@ -48,6 +56,8 @@ const themeReducer = (state, action) => {
       return themesColors.one;
     case themes.TWO:
       return themesColors.two;
+    case themes.THREE:
+      return themesColors.three;
 
     default:
       return themesColors.light;

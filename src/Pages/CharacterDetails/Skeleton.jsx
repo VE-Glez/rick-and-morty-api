@@ -5,7 +5,7 @@ const Skeleton = () => {
       <div className="image"></div>
 
       <div>
-        <h3></h3>
+        <div></div>
         <p></p>
         <p></p>
         <ul>

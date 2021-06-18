@@ -13,7 +13,7 @@ const Navbar = ({ isOpen }) => {
       newShowFixed !== showFixed && setShowFixed(newShowFixed);
     };
     document.addEventListener("scroll", onScroll);
-  }, []);
+  }, [showFixed]);
 
   return (
     <Nav toggled={isOpen}>

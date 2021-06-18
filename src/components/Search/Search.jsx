@@ -28,7 +28,7 @@ const Search = ({ placeHolder }) => {
 
   const handleSearch = useCallback(
     () => setSearch(searchReference.current.value),
-    []
+    [searchReference, setSearch]
   );
   return (
     <SearchBox className="search">
