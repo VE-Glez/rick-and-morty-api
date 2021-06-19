@@ -15,7 +15,7 @@ import LocationsDetails from "./Pages/LocationDetails/LocationsDetails";
 function App() {
   const { theme } = useTheme();
   return (
-    <div style={{textAlign: "center"}}>
+    <div id="appContainer" style={{textAlign: "center"}}>
       <ThemeProvider theme={theme}>
       <GlobalStyles theme={theme} />
       <APIProvider>

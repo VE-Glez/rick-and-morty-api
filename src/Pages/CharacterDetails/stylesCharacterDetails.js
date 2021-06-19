@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ListEpisodes = styled.section`
-    width: 50%;
+    width: max(300px, 75%);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -9,5 +9,5 @@ export const ListEpisodes = styled.section`
 `
 
 export const Container = styled.div`
-    padding: 2em;
+    margin: 1em;
 `

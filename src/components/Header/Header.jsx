@@ -7,9 +7,18 @@ const Header = () => {
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    const desapearMenu = () => setOpen(false);
-    const el = document.querySelectorAll('div')
-    // el[0].addEventListener("click", desapearMenu);
+    const desapearMenu = (e) => {
+      console.log(e.currentTarget)
+      setOpen(false)
+    };
+    const el = document.querySelectorAll('*:not(header, div.hamburger-react, div.hamburger-react *, div#appContainer, #root, body, html, head)')
+    el.forEach(el => {
+      el.addEventListener("click", desapearMenu)
+    })
+
+    return () => { el.forEach(el => {
+      el.removeEventListener("click", desapearMenu)
+    })}
 
   }, []);
 
