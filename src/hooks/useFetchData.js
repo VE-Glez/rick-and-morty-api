@@ -9,7 +9,6 @@ const useFetchData = (parameter, ID) => {
   const [result, setResult] = useState({data: {}, loading: true});
   const {episodes, setEpisodes, locations, setLocations, characters, setCharacters} = useAPI()
 
-  console.count(`LLamada al fetch. Parameter: ${parameter} and ID: ${ID}`)
   const getRequest = {
     episode: () => request(episodes, ID),
     character: () => request(characters, ID),
@@ -37,7 +36,6 @@ const useFetchData = (parameter, ID) => {
 
   useEffect(() => {
     const currentRequest = getRequest[parameter]()
-    console.log("current req",currentRequest)
     const condition = currentRequest.length > 0
 
     if(condition) {
@@ -54,7 +52,6 @@ const useFetchData = (parameter, ID) => {
         .catch(err => console.log("el fetch ha petado :'v", err.message))
       }
   }, []);
-  console.log("custom hook return: ", result)
   return {
     result
   };

@@ -11,8 +11,6 @@ const Episodes = () => {
   const search = !searchReference.current
     ? "null"
     : searchReference.current.value;
-    //puse locatioon pero se refiere a los episodios
-  // const [episodes, setEpisodes] = useState([]);
   const {episodes, setEpisodes} = useAPI()
   const [page, setPage] = useState(1);
 
@@ -37,8 +35,7 @@ const Episodes = () => {
                 newOnes = [...newOnes, episode]
               }
             })
-            console.log("nuevos agregados a episodios: ", newOnes, "actuales: ", episodes)
-            return setEpisodes((pv) => [...pv, ...newOnes]);
+            setEpisodes((pv) => [...pv, ...newOnes]);
           });
           setPage(pv => pv + 1);
         }
@@ -54,9 +51,10 @@ const Episodes = () => {
     <>
       <Container>
         <h2>Lista completa de episodios</h2>
-        {episodesFilteres.map((episode) => (
-          <EpisodeCard key={episode.id} {...episode} />
-        ))}
+        {episodesFilteres.map((episode) => {
+          return <EpisodeCard key={episode.id} {...episode} />
+        }
+        )}
       </Container>
       <div id="loadMore"></div>
     </>

@@ -8,7 +8,7 @@ export const useSearchRef = () => {
 
 const SearchContext = ({ children }) => {
   const searchReference = useRef(null);
-  const [search, setSearch] = useState(" ");
+  const [search, setSearch] = useState("");
   return (
     <SearchContextRef.Provider value={{ searchReference, search, setSearch }}>
       {children}

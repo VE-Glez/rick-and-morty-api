@@ -9,11 +9,10 @@ const EpisodeCardFromFetch = ({ episodeID}) => {
   const data = {
     id: result.data.id,
     name: result.data.name,
-    air_data: result.data.air_data,
+    air_date: result.data.air_date,
     episode: result.data.episode
   }
 
-  console.log({...result.data})
   return (
     <EpisodeCard {...data} />
   );

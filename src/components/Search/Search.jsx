@@ -24,7 +24,7 @@ const SearchBox = styled.div`
 `;
 
 const Search = ({ placeHolder }) => {
-  const { searchReference, setSearch } = useSearchRef();
+  const { searchReference, setSearch, search } = useSearchRef();
 
   const handleSearch = useCallback(
     () => setSearch(searchReference.current.value),
@@ -36,6 +36,7 @@ const Search = ({ placeHolder }) => {
         type="text"
         ref={searchReference}
         onInput={handleSearch}
+        value={search}
         placeholder={placeHolder}
       />
       <label onClick={() => searchReference.current.focus()}>

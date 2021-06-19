@@ -2,10 +2,12 @@ import { Nav, NavItem } from "./styles";
 import { useState, useEffect } from "react";
 import Search from "../Search/Search";
 import ThemePicker from "../ThemePicker/ThemePicker";
+import { useSearchRef } from "../../context/SearchContext";
 
 
 const Navbar = ({ isOpen }) => {
   const [showFixed, setShowFixed] = useState(false);
+  const {setSearch} = useSearchRef()
 
   useEffect(() => {
     const onScroll = () => {
@@ -15,14 +17,18 @@ const Navbar = ({ isOpen }) => {
     document.addEventListener("scroll", onScroll);
   }, [showFixed]);
 
+  const handleClick = () => {
+    setSearch("")
+  }
+
   return (
     <Nav toggled={isOpen}>
       <ThemePicker />
-      <Search placeHolder="Search in this page" />
+      <Search placeHolder="Search in this page by name" />
       {/* el search hace a dos referencias  */}
-      <NavItem to="/">Characters</NavItem>
-      <NavItem to="/locations">Locations</NavItem>
-      <NavItem to="/episodes">Episodes</NavItem>
+      <NavItem onClick={handleClick} to="/">Characters</NavItem>
+      <NavItem onClick={handleClick} to="/locations">Locations</NavItem>
+      <NavItem onClick={handleClick} to="/episodes">Episodes</NavItem>
     </Nav>
   );
 };

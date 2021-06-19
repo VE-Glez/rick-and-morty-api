@@ -30,9 +30,17 @@ const Characters = () => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
         if (entries[0].isIntersecting && page < 35) {
-          getMoreCharacters(page).then((data) =>
-            setCharacters((pv) => [...pv, ...data])
-          );
+          getMoreCharacters(page).then((data) =>{
+            let newOnes = []
+            data.map( character => {
+              let id = character.id
+              let exists = characters.filter(ep => ep.id == id).length > 0
+              if(!exists) {
+                newOnes = [...newOnes, character]
+              }
+            })
+            setCharacters((pv) => [...pv, ...newOnes]);
+          });
           setPage(page + 1);
         }
       },

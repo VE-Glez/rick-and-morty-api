@@ -14,6 +14,7 @@ const FavoritesSection = ({ listOfFavorites }) => {
       <h3>Lista de favoritos</h3>
       {listOfFavorites.map((favorite, index, thisArray) => (
         <FavoriteCharacter
+          key={favorite.url}
           favorite={favorite}
           active={active}
           thisArray={thisArray}

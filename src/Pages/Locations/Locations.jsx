@@ -1,17 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useSearchRef } from "../../context/SearchContext";
-const getMoreLocations = async (page) => {
-  let myLocation = await fetch(
-    `https://rickandmortyapi.com/api/location/?page=${page}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
 
-  return myLocation.results;
-};
+import { useSearchRef } from "../../context/SearchContext";
+import { getMoreLocations } from "../../utils/getMoreLocation";
+import {Card, Container, Tag} from './styles'
 
 const Locations = () => {
   const { searchReference } = useSearchRef();
@@ -32,7 +23,6 @@ const Locations = () => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
         if (entries[0].isIntersecting && page < 6) {
-          console.log(entries[0].isIntersecting);
           getMoreLocations(page).then((data) => {
             return seLocations((pv) => [...pv, ...data]);
           });
@@ -48,20 +38,17 @@ const Locations = () => {
 
   return (
     <>
-      <div>
-        <h2>Página de las dimensiones existentes conocidas filtered</h2>
+      <Container>
+        <h2>Lista de todas las dimensiones conocidas</h2>
         {filteredUsers.map((myLoc) => (
-          <div key={myLoc.id} style={{border: '1px solid crimson'}}>
-            <Link to={`/locations/${myLoc.id}`}>
-            <p>Lugar #{myLoc.id}</p>
-            <p>{myLoc.name}</p>
-            <p>{myLoc.type}</p>
-            <p>{myLoc.dimension}</p>
-            <p>{myLoc.created}</p>
-            </Link>
-          </div>
+          <Card key={myLoc.id} to={`/locations/${myLoc.id}`}>
+            {/* <p>Lugar #{myLoc.id}</p> */}
+            <p><Tag>{myLoc.name}</Tag></p>
+            <p><Tag>Type:</Tag> {myLoc.type}</p>
+            <p><Tag>Dimension:</Tag> {myLoc.dimension}</p>
+          </Card>
         ))}
-      </div>
+      </Container>
       <div id="loadMore"></div>
     </>
   );

@@ -1,9 +1,8 @@
-import { Card } from "./styles";
+import { Button, Card } from "./styles";
 
 const MinimalCard = ({ favorite, active, thisArray, index, callback }) => {
   return (
     <Card
-      key={favorite.id}
       className={
         favorite.id === active.id
           ? "isActive"
@@ -15,7 +14,7 @@ const MinimalCard = ({ favorite, active, thisArray, index, callback }) => {
     >
       <img src={favorite.image} alt={favorite.name} />
       <h4>{favorite.name}</h4>
-      <p>Favorite ID: {favorite.id}</p>
+      <Button to={`/characterDetails/${favorite.id}`}>More Details</Button>
     </Card>
   );
 };

@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import {Link} from 'react-router-dom'
 const shBorder = "2px";
 const shSpread = "5px";
+
 export const Card = styled.article`
   background-color: rgba(0, 0, 0, 0.1);
   filter: blur(0.9);
@@ -29,3 +31,15 @@ export const Card = styled.article`
     margin: 0 20px;
   }
 `;
+
+export const Button = styled(Link)`
+  width: 100%;
+  padding: 0.35em 0;
+  color: ${({theme}) => theme.bg};
+  background: ${({theme}) => theme.fg};
+  text-transform: uppercase;
+  text-decoration:none;
+  font-weight: bold;
+  display: inline-flex;
+
+`

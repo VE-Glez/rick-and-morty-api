@@ -1,5 +1,4 @@
 export const getMoreEpisodes = async (page) => {
-  console.log("la pagina que quiero ver ss: ", page)
     let myLocation = await fetch(
       `https://rickandmortyapi.com/api/episode/?page=${page}`
     )

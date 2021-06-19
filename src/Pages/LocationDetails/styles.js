@@ -13,7 +13,8 @@ export const Tag = styled.span`
 export const CharactersContainer = styled.section`
     display: grid;
     place-content: center;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 450px));
+    gap: 2em;
+    grid-template-columns: repeat(auto-fill, 150px);
 
     *:first-child{
         grid-column: 1 / -1;
