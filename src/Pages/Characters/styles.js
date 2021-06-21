@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   place-content: center;
   grid-template-columns: repeat(auto-fill, 322px);
   gap: 20px 15px;
-  padding-top: 1px;
+  padding: 1.5em 0;
   overflow-y: scroll;
   box-sizing: border-box;
 `;

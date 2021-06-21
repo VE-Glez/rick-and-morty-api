@@ -1,21 +1,21 @@
-import { useState, useEffect, useMemo } from "react";
-import CharacterCard from "../../components/CharacterCard/CharacterCard";
-import { Container } from "./styles";
-import FavoritesSection from "../../components/FavoritesSection/FavoritesSection";
-import { useSearchRef } from "../../context/SearchContext";
-import { getMoreCharacters } from "../../utils/getMoreCharacters";
-import { useAPI } from "../../context/APIContext";
+import { useState, useEffect, useMemo } from 'react';
+import CharacterCard from '../../components/CharacterCard/CharacterCard';
+import { Container } from './styles';
+import FavoritesSection from '../../components/FavoritesSection/FavoritesSection';
+import { useSearchRef } from '../../context/SearchContext';
+import { getMoreCharacters } from '../../utils/getMoreCharacters';
+import { useAPI } from '../../context/APIContext';
 
 const Characters = () => {
   const { searchReference } = useSearchRef();
   const search = !searchReference.current
-    ? "null"
+    ? 'null'
     : searchReference.current.value;
-  const { characters, setCharacters, favorites, dispatch} = useAPI()
+  const { characters, setCharacters, favorites, dispatch } = useAPI();
   const [page, setPage] = useState(1);
-  
+
   const handleClick = (favorite) => {
-    dispatch({ type: "TOGGLE_TO_FAVORITES", payload: favorite });
+    dispatch({ type: 'TOGGLE_TO_FAVORITES', payload: favorite });
   };
 
   const filteredUsers = useMemo(
@@ -30,15 +30,15 @@ const Characters = () => {
     let chargeButton = new IntersectionObserver(
       (entries, observer) => {
         if (entries[0].isIntersecting && page < 35) {
-          getMoreCharacters(page).then((data) =>{
-            let newOnes = []
-            data.map( character => {
-              let id = character.id
-              let exists = characters.filter(ep => ep.id == id).length > 0
-              if(!exists) {
-                newOnes = [...newOnes, character]
+          getMoreCharacters(page).then((data) => {
+            let newOnes = [];
+            data.forEach((character) => {
+              let id = character.id;
+              let exists = characters.filter((ep) => ep.id == id).length > 0;
+              if (!exists) {
+                newOnes = [...newOnes, character];
               }
-            })
+            });
             setCharacters((pv) => [...pv, ...newOnes]);
           });
           setPage(page + 1);
@@ -46,17 +46,17 @@ const Characters = () => {
       },
       { threshold: 0.1 }
     );
-    chargeButton.observe(document.getElementById("loadMore"));
+    chargeButton.observe(document.getElementById('loadMore'));
 
     return () => chargeButton.disconnect();
-  }, [page, setCharacters]);
+  }, [page, setCharacters, characters]);
 
   return (
     <>
       <FavoritesSection
         listOfFavorites={favorites.favorites}
       ></FavoritesSection>
-      <Container className="Characters">
+      <Container className='Characters'>
         {filteredUsers.map((character) => (
           <CharacterCard
             key={character.id}
@@ -65,7 +65,7 @@ const Characters = () => {
             myFavorites={favorites.favorites}
           ></CharacterCard>
         ))}
-        <div id="loadMore"></div>
+        <div id='loadMore'></div>
       </Container>
     </>
   );

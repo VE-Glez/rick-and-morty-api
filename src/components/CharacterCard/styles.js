@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Article = styled.article`
   width: 310px;
@@ -8,10 +8,10 @@ export const Article = styled.article`
   display: grid;
   gap: 10px 0;
   box-shadow: 0 0 5px;
-  background-color: ${({theme}) => theme.cardBackground};
+  background-color: ${({ theme }) => theme.cardBackground};
   grid:
-    "header info" auto
-    "like more" 29px / 1fr 1fr;
+    'header info' auto
+    'like more' 29px / 1fr 1fr;
   justify-items: stretch;
 
   header {
@@ -46,10 +46,10 @@ export const LINK = styled(Link)`
   padding: 4px;
   width: 75%;
   height: auto;
-  color: ${({theme})=> theme.bg};
+  color: ${({ theme }) => theme.bg} !important;
   text-decoration: none;
   transition: 0.5s ease-in;
-  background-color: ${({theme}) => theme.CTA};
+  background-color: ${({ theme }) => theme.CTA};
   border-radius: 5px;
 
   /* &:hover {
