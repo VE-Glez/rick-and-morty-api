@@ -24,6 +24,7 @@ export const ButtonToggleFavorite = styled.button`
   border: 1px solid ${({ theme }) => theme.CTA};
   padding: 0.75em;
   text-transform: uppercase;
-  background-color: ${({ theme }) => theme.bg};
+  background-color: transparent;
+  color: ${({ theme }) => theme.CTA};
   border-radius: 2em;
 `;

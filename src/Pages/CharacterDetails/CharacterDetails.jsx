@@ -35,21 +35,23 @@ const CharacterDetails = (props) => {
           <p>Gender: {result.data.gender}</p>
           <p>Location: {result.data.origin.name}</p>
           <p>
-            {favorites.favorites.includes(result.data) ? (
-              <FavoriteToggleContainer>
-                <p>This character is in your favorite list</p>
-                <ButtonToggleFavorite onClick={() => setIsOpen(true)}>
-                  remove it
-                </ButtonToggleFavorite>
-              </FavoriteToggleContainer>
-            ) : (
-              <FavoriteToggleContainer>
-                <p>This character is not in your favorite list</p>
-                <ButtonToggleFavorite onClick={handleAction}>
-                  add it
-                </ButtonToggleFavorite>
-              </FavoriteToggleContainer>
-            )}
+            <FavoriteToggleContainer>
+              {favorites.favorites.includes(result.data) ? (
+                <>
+                  <p>This character is in your favorite list</p>
+                  <ButtonToggleFavorite onClick={() => setIsOpen(true)}>
+                    remove it
+                  </ButtonToggleFavorite>
+                </>
+              ) : (
+                <>
+                  <p>This character is not in your favorite list</p>
+                  <ButtonToggleFavorite onClick={handleAction}>
+                    add it
+                  </ButtonToggleFavorite>
+                </>
+              )}
+            </FavoriteToggleContainer>
           </p>
           <ListEpisodes>
             <h4>Episodes:</h4>

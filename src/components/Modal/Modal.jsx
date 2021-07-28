@@ -2,8 +2,16 @@ import { createPortal } from 'react-dom';
 import { ModalContainer, ModalContent, ModalButton, Title } from './styles';
 
 const Modal = ({ isOpen, handleAction, handleClose }) => {
-  if (!isOpen) return null;
-  console.log(createPortal);
+  const body = document.body;
+
+  if (!isOpen) {
+    body.style = {};
+    return null;
+  } else {
+    body.style.overflow = 'hidden';
+    body.style.paddingInlineEnd = '-16px';
+  }
+
   return createPortal(
     <ModalContainer>
       <ModalContent>

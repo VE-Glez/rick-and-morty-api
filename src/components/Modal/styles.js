@@ -16,8 +16,8 @@ export const ModalContainer = styled.div`
 export const ModalContent = styled.section`
   background-color: white;
   color: black;
-  width: 50%;
-  height: 50%;
+  width: min(80%, 450px);
+  height: min(50%, 350px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   place-content: center;

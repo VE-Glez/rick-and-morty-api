@@ -51,8 +51,4 @@ export const LINK = styled(Link)`
   transition: 0.5s ease-in;
   background-color: ${({ theme }) => theme.CTA};
   border-radius: 5px;
-
-  /* &:hover {
-    background-color: rgba(25, 85, 200, 0.8);
-  } */
 `;
