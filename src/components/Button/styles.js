@@ -1,14 +1,29 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
-export const StyledButton = styled(Link)`
+const variants = {
+  outlined: css`
+    color: ${({ theme }) => theme.fg};
+    background-color: transparent;
+    border: 2px solid ${({ theme }) => theme.CTA};
+  `,
+  primary: css`
+    color: ${({ theme }) => theme.bg};
+    background-color: ${({ theme }) => theme.CTA};
+    border: none;
+  `,
+};
+
+export const StyledButton = styled.button`
+  font-size: 1.5rem;
   margin: 0 auto;
   padding: 4px;
-  width: 75%;
   height: auto;
-  color: ${({ theme }) => theme.bg} !important;
+  min-width: 150px;
   text-decoration: none;
   transition: 0.5s ease-in;
-  background-color: ${({ theme }) => theme.CTA};
   border-radius: 5px;
+  box-shadow: 0 1px 1px 0 black;
+  outline: none;
+  ${({ variant }) =>
+    variant === undefined ? variants['primary'] : variants[variant]}
 `;

@@ -1,5 +1,7 @@
 import { useTheme } from '../../context/ThemeContext';
-import { Article, LINK } from './styles';
+import Button from '../Button/Button';
+import { Article, Body, Footer } from './styles';
+import { Link } from 'react-router-dom';
 
 const CharacterCard = ({ click, myFavorites, myCharacter }) => {
   const { theme } = useTheme();
@@ -12,16 +14,20 @@ const CharacterCard = ({ click, myFavorites, myCharacter }) => {
         </picture>
         <h3>{name}</h3>
       </header>
-      <section className='cardBody'>
+      <Body>
         <p className='status'>Status: {status}</p>
         <p>Especie: {species}</p>
         <p>Género: {gender}</p>
-      </section>
-      <button onClick={() => click(myCharacter)}>
-        {myFavorites.includes(myCharacter) ? 'Remove from ' : 'Add to'}{' '}
-        favorites
-      </button>
-      <LINK to={`/characterDetails/${id}`}>More details</LINK>
+      </Body>
+      <Footer>
+        <Button onClick={() => click(myCharacter)}>
+          {myFavorites.includes(myCharacter) ? 'Remove from ' : 'Add to'}{' '}
+          favorites
+        </Button>
+        <Link to={`/characterDetails/${id}`}>
+          <Button variant='outlined'>More details</Button>
+        </Link>
+      </Footer>
     </Article>
   );
 };

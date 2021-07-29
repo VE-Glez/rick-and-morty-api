@@ -10,6 +10,7 @@ import {
 } from './stylesCharacterDetails';
 import { useAPI } from '../../context/APIContext';
 import Modal from '../../components/Modal/Modal';
+import Button from '../../components/Button/Button';
 
 const CharacterDetails = (props) => {
   window.scrollTo(0, 0);
@@ -39,16 +40,12 @@ const CharacterDetails = (props) => {
               {favorites.favorites.includes(result.data) ? (
                 <>
                   <p>This character is in your favorite list</p>
-                  <ButtonToggleFavorite onClick={() => setIsOpen(true)}>
-                    remove it
-                  </ButtonToggleFavorite>
+                  <Button onClick={() => setIsOpen(true)}>remove it</Button>
                 </>
               ) : (
                 <>
                   <p>This character is not in your favorite list</p>
-                  <ButtonToggleFavorite onClick={handleAction}>
-                    add it
-                  </ButtonToggleFavorite>
+                  <Button onClick={handleAction}>add it</Button>
                 </>
               )}
             </FavoriteToggleContainer>
